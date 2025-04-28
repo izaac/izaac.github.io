@@ -13,7 +13,7 @@ resume_avatar:                  "false"
 resume_name:                    "Izaac Zavaleta"
 resume_title:                   "QA Engineer"
 resume_contact_email:
-  "jorge.izaac@gmail.com"
+  "izaac@linux.com"
 
 # use "yes" to display the email contact button,
 # "no" to display an "I'm not looking for work" message,
@@ -40,7 +40,7 @@ resume_social_links:
   # resume_facebook_url:          ""
   # resume_linkedin_url:          "https://www.linkedin.com/in/izaaczavaleta"
   # resume_instagram_url:         ""
-  resume_website_url:           "https://izaac.me/blog"
+  # resume_website_url:           "https://izaac.me/blog"
 
 # Design settings
 resume_theme:                   default
