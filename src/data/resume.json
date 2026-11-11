@@ -1,0 +1,215 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Izaac Zavaleta",
+    "label": "Staff QA Engineer",
+    "email": "izaac@linux.com",
+    "url": "https://www.izaac.me",
+    "summary": "Staff QA Engineer with a decade-plus of hands-on ownership of quality for Kubernetes and Rancher-based enterprise platforms. Designs end-to-end automation architectures (Playwright, Cypress, Node.js, Python) that hold up across multi-version release trains, builds CI/CD quality gates that catch regressions before they ship, and drives performance and systems-level validation from HTTP layer down to OS syscalls. Comfortable leading test strategy, framework design, and release regression for distributed, multi-tier applications on Linux.",
+    "location": {
+      "city": "Remote",
+      "countryCode": "US",
+      "region": "USA"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "izaac",
+        "url": "https://github.com/izaac"
+      },
+      {
+        "network": "Website",
+        "username": "izaac",
+        "url": "https://www.izaac.me"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "SUSE",
+      "position": "Staff QA Engineer",
+      "url": "https://www.suse.com",
+      "startDate": "2022-01",
+      "summary": "Technical lead for quality on Rancher and Kubernetes-facing web solutions, owning test architecture, automation strategy, and release regression across the full release lifecycle.",
+      "highlights": [
+        "Own the end-to-end automation architecture for Rancher web solutions, covering functional, UI, and regression layers across multi-version release trains.",
+        "Design and sustain CI/CD quality gates so regression suites run continuously per release cycle instead of as a manual pre-release phase.",
+        "Lead framework stabilization work, reducing flaky coverage and keeping suites maintainable as product surface area grows.",
+        "Drive quality strategy with product and engineering stakeholders, defining what ships and what blocks, backed by automation evidence.",
+        "Pair targeted manual and exploratory testing with automation for iterative releases to maximise web quality of products and solutions."
+      ]
+    },
+    {
+      "name": "SUSE",
+      "position": "Senior QA Engineer",
+      "url": "https://www.suse.com",
+      "startDate": "2021-01",
+      "endDate": "2022-01",
+      "summary": "Senior automation engineer responsible for functional and UI coverage of enterprise web solutions, plus framework maintenance and regression execution.",
+      "highlights": [
+        "Built and maintained functional and UI continuous web automation suites for enterprise web solutions.",
+        "Executed QA regression test cases at every release lifecycle stage, owning pass/fail evidence for release readiness.",
+        "Sustained and stabilised test frameworks through product changes, writing reusable page and service abstractions.",
+        "Applied automation best practices and tooling evaluation to raise coverage, speed, and reliability of the suite."
+      ]
+    },
+    {
+      "name": "Rancher Labs",
+      "position": "QA Engineer",
+      "url": "https://rancher.com",
+      "startDate": "2019-08",
+      "endDate": "2020-12",
+      "summary": "QA automation for Rancher, a Kubernetes management platform, covering functional, UI, and regression validation of cluster management workflows.",
+      "highlights": [
+        "Owned functional and UI continuous web automation for Kubernetes management workflows.",
+        "Executed regression test cases for each release, validating upgrade paths and cluster-facing behaviour.",
+        "Sustained and stabilised web test frameworks against a rapidly changing product.",
+        "Supplemented automation with manual QA on iterative releases to maximise delivery quality."
+      ]
+    },
+    {
+      "name": "Nearsoft",
+      "position": "QA Automation Engineer",
+      "startDate": "2016-04",
+      "endDate": "2017-04",
+      "summary": "QA automation and web performance engineering for distributed client products.",
+      "highlights": [
+        "Built functional and UI continuous web automation for client applications.",
+        "Identified and designed automated functional and regression tests.",
+        "Sustained and stabilised test frameworks across product iterations.",
+        "Performed web performance testing and analysis as part of the quality scope."
+      ]
+    },
+    {
+      "name": "Tiempo Development",
+      "position": "QA Engineer Lead / Senior QA",
+      "startDate": "2014-06",
+      "endDate": "2016-03",
+      "summary": "Manual and API-level QA for complex, multi-tier distributed applications, including Tripwire Enterprise work, covering backend validation and full-lifecycle test planning.",
+      "highlights": [
+        "Developed, published, and implemented test plans for complex, multi-tier, distributed applications across the full software lifecycle.",
+        "Performed backend testing and API-level validation of distributed systems.",
+        "Estimated test effort and managed test cases and incidents using test management tooling."
+      ]
+    },
+    {
+      "name": "Tiempo Development",
+      "position": "QA Engineer",
+      "startDate": "2012-03",
+      "endDate": "2014-06",
+      "summary": "Manual QA on multi-tier distributed applications, working as a certified Tripwire Enterprise operator and professional."
+    },
+    {
+      "name": "Internet Brands",
+      "position": "Network Operations Center Engineer",
+      "url": "https://www.internetbrands.com",
+      "startDate": "2010-05",
+      "endDate": "2012-03",
+      "summary": "NOC operations covering network monitoring, incident response, and web service troubleshooting.",
+      "highlights": [
+        "Detected and responded to network issues and service incidents in real time.",
+        "Identified attacker activity using firewall and network analysis tooling.",
+        "Ran network pattern checks and troubleshot web services to restore availability."
+      ]
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "Universidad de las Américas Puebla (UDLAP)",
+      "url": "https://www.udlap.mx",
+      "area": "Information Technology",
+      "studyType": "Master in Business Administration (MBA)",
+      "courses": [
+        "Capstone grade project: automated online retailing"
+      ]
+    },
+    {
+      "institution": "Hermosillo Institute of Technology",
+      "area": "Systems Engineering",
+      "studyType": "Bachelor of Science (BSc)",
+      "startDate": "2004",
+      "endDate": "2008"
+    }
+  ],
+  "certificates": [],
+  "skills": [
+    {
+      "name": "E2E & Automation",
+      "level": "Expert",
+      "keywords": [
+        "Playwright",
+        "Cypress",
+        "Node.js",
+        "Python",
+        "Scrapy"
+      ]
+    },
+    {
+      "name": "Cloud & Platforms",
+      "level": "Advanced",
+      "keywords": [
+        "Kubernetes",
+        "Rancher",
+        "Linux",
+        "Docker",
+        "Home Lab Provisioning"
+      ]
+    },
+    {
+      "name": "Performance & Systems",
+      "level": "Advanced",
+      "keywords": [
+        "JMeter",
+        "Web Performance",
+        "System Calls",
+        "Backend Testing",
+        "Network Troubleshooting"
+      ]
+    },
+    {
+      "name": "Methodologies",
+      "level": "Expert",
+      "keywords": [
+        "CI/CD",
+        "Framework Design",
+        "Regression Strategy",
+        "Release Quality Gates",
+        "Exploratory Testing",
+        "Test Management"
+      ]
+    },
+    {
+      "name": "Data & Scraping",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Scraping",
+        "Pandas",
+        "Scrapy"
+      ]
+    },
+    {
+      "name": "Web Technologies",
+      "level": "Advanced",
+      "keywords": [
+        "HTML5",
+        "Async JavaScript"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "English",
+      "fluency": "Professional working proficiency"
+    }
+  ],
+  "meta": {
+    "canonical": "https://www.izaac.me",
+    "version": "v1.0.0",
+    "lastModified": "2026-11-10T00:00:00"
+  }
+}

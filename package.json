@@ -1,0 +1,25 @@
+{
+  "name": "izaac-cv",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Izaac Zavaleta - CV site built with Astro",
+  "scripts": {
+    "sync:resume": "node scripts/sync-resume.mjs",
+    "dev": "npm run sync:resume && astro dev",
+    "start": "npm run dev",
+    "build": "npm run sync:resume && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.18.2",
+    "tailwindcss": "^3.4.18"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/node": "^24.10.1"
+  }
+}

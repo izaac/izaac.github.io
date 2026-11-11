@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t">
+  <title id="t">IZ monogram emblem</title>
+  <defs>
+    <linearGradient id="bg" x1="14" y1="6" x2="114" y2="122" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#334155" />
+      <stop offset="0.45" stop-color="#1e293b" />
+      <stop offset="1" stop-color="#312e81" />
+    </linearGradient>
+    <radialGradient id="sheen" cx="34" cy="20" r="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22" />
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="accent" x1="46" y1="0" x2="82" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#818cf8" />
+      <stop offset="0.5" stop-color="#38bdf8" />
+      <stop offset="1" stop-color="#818cf8" />
+    </linearGradient>
+    <clipPath id="zClip">
+      <rect x="58" y="40" width="34" height="47.75" />
+    </clipPath>
+  </defs>
+
+  <!-- squircle body -->
+  <rect x="4" y="4" width="120" height="120" rx="34" fill="url(#bg)" />
+  <rect x="4" y="4" width="120" height="120" rx="34" fill="url(#sheen)" />
+  <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="33.25" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+
+  <!-- IZ monogram: square terminals, legible down to 32px -->
+  <g transform="translate(0,-3.5)" fill="#f8fafc">
+    <g clip-path="url(#zClip)">
+      <path d="M97 44 53 84" stroke="#f8fafc" stroke-width="10.5" stroke-linecap="butt" fill="none" />
+      <rect x="58" y="40" width="34" height="10.5" />
+      <rect x="58" y="77.25" width="34" height="10.5" />
+    </g>
+    <rect x="34.75" y="40" width="10.5" height="47.75" />
+    <rect x="46" y="93" width="36" height="3" rx="1.5" fill="url(#accent)" />
+  </g>
+</svg>

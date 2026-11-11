@@ -1,0 +1,146 @@
+---
+import '../styles/global.css';
+import resume from '../data/resume.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Izaac Zavaleta — Staff QA Engineer',
+  description = resume.basics.summary,
+  canonical = 'https://www.izaac.me/',
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://www.izaac.me');
+const canonicalURL = new URL(canonical, site);
+const ogImage = new URL('/avatar.png', site);
+
+const basics = resume.basics;
+const currentRole = resume.work[0];
+const knowsAbout = [...new Set(resume.skills.flatMap((group) => group.keywords))];
+
+/* Schema.org Person: gives search engines and recruiting tools structured,
+   unambiguous data that mirrors the visible page content. */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: basics.name,
+  jobTitle: basics.label,
+  description: basics.summary,
+  url: basics.url,
+  email: `mailto:${basics.email}`,
+  image: ogImage.href,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: basics.location.city,
+    addressRegion: basics.location.region,
+    addressCountry: basics.location.countryCode,
+  },
+  worksFor: {
+    '@type': 'Organization',
+    name: currentRole.name,
+    ...(currentRole.url ? { url: currentRole.url } : {}),
+  },
+  alumniOf: resume.education.map((school) => ({
+    '@type': 'CollegeOrUniversity',
+    name: school.institution,
+    ...(school.url ? { url: school.url } : {}),
+  })),
+  hasCredential: resume.certificates.map((certificate) => ({
+    '@type': 'EducationalOccupationalCredential',
+    name: certificate.name,
+    credentialCategory: 'certification',
+    ...(certificate.issuer
+      ? { recognizedBy: { '@type': 'Organization', name: certificate.issuer } }
+      : {}),
+  })),
+  knowsAbout,
+  knowsLanguage: resume.languages.map((entry) => entry.language),
+  sameAs: basics.profiles.map((profile) => profile.url),
+};
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={basics.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={`${basics.name} — CV`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:alt" content={`${basics.name} monogram emblem`} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="profile:first_name" content="Izaac" />
+    <meta property="profile:last_name" content="Zavaleta" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+    <meta name="twitter:image:alt" content={`${basics.name} monogram emblem`} />
+
+    <link rel="icon" href="/favicon.png" sizes="any" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="alternate" type="application/json" href="/resume.json" title="JSON Resume" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Theme: apply the stored/system preference before first paint to avoid a flash. -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch (error) {
+          stored = null;
+        }
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var dark = stored === 'dark' || (stored !== 'light' && prefersDark);
+        root.classList.toggle('dark', dark);
+        root.dataset.theme = dark ? 'dark' : 'light';
+
+        // Follow the OS while the visitor has not made an explicit choice.
+        window
+          .matchMedia('(prefers-color-scheme: dark)')
+          .addEventListener('change', function (event) {
+            var choice = null;
+            try {
+              choice = localStorage.getItem('theme');
+            } catch (error) {
+              choice = null;
+            }
+            if (choice) return;
+            root.classList.toggle('dark', event.matches);
+            root.dataset.theme = event.matches ? 'dark' : 'light';
+          });
+      })();
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </head>
+
+  <body class="min-h-full font-sans">
+    <slot />
+  </body>
+</html>

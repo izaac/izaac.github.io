@@ -1,0 +1,41 @@
+---
+interface Props {
+  certificates: Array<{
+    name: string;
+    issuer?: string;
+    date?: string;
+    url?: string;
+    summary?: string;
+  }>;
+}
+
+const { certificates } = Astro.props;
+
+const formatYear = (date?: string) => (date ? new Date(date).getUTCFullYear().toString() : undefined);
+---
+
+<ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 print:grid-cols-2 print:gap-1.5">
+  {certificates.map((certificate) => (
+    <li class="rounded-xl border border-slate-200 bg-white/70 px-4 py-3 dark:border-slate-800 dark:bg-slate-900/40 print:break-inside-avoid print:rounded-none print:border-0 print:bg-transparent print:p-0">
+      <h3 class="text-[0.875rem] font-semibold text-slate-900 dark:text-white print:text-[9.5pt]">
+        {certificate.url ? (
+          <a href={certificate.url} target="_blank" rel="noopener noreferrer" class="transition hover:text-brand-700 dark:hover:text-brand-300">
+            {certificate.name}
+          </a>
+        ) : (
+          certificate.name
+        )}
+      </h3>
+
+      <p class="mt-0.5 text-[0.8125rem] text-slate-500 dark:text-slate-400 print:text-[9pt] print:text-neutral-700">
+        {[certificate.issuer, formatYear(certificate.date)].filter(Boolean).join(' · ')}
+      </p>
+
+      {certificate.summary && (
+        <p class="mt-1 text-[0.8125rem] text-slate-500 dark:text-slate-400 print:text-[9pt] print:text-neutral-700">
+          {certificate.summary}
+        </p>
+      )}
+    </li>
+  ))}
+</ul>

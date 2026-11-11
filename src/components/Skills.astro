@@ -1,0 +1,32 @@
+---
+interface Props {
+  skills: Array<{ name: string; level?: string; keywords: string[] }>;
+}
+
+const { skills } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 print:grid-cols-2 print:gap-y-2">
+  {skills.map((group) => (
+    <div class="print:break-inside-avoid">
+      <h3 class="text-[0.875rem] font-semibold text-slate-900 dark:text-white print:text-[9.5pt]">
+        {group.name}
+        {group.level && (
+          <span class="ml-1.5 text-[0.75rem] font-normal uppercase tracking-wide text-slate-400 dark:text-slate-500 print:normal-case print:tracking-normal print:text-neutral-600">
+            {group.level}
+          </span>
+        )}
+      </h3>
+      <ul class="mt-2 flex flex-wrap gap-1.5 print:hidden">
+        {group.keywords.map((keyword) => (
+          <li class="chip">{keyword}</li>
+        ))}
+      </ul>
+
+      <!-- Print/ATS: comma-separated plain text reads cleanly and parses better. -->
+      <p class="mt-1 hidden print:block print:text-neutral-800">
+        {group.keywords.join(', ')}
+      </p>
+    </div>
+  ))}
+</div>

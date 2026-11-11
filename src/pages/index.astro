@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Section from '../components/Section.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Education from '../components/Education.astro';
+import Certifications from '../components/Certifications.astro';
+import Volunteer from '../components/Volunteer.astro';
+
+import resume from '../data/resume.json';
+
+const { basics, work, volunteer, education, certificates, skills, languages, meta } = resume;
+
+const lastUpdated = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(meta.lastModified));
+---
+
+<Layout
+  title={`${basics.name} — ${basics.label}`}
+  description={basics.summary}
+  canonical={`${basics.url}/`}
+>
+  <a
+    href="#experience-heading"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-600 focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+  >
+    Skip to content
+  </a>
+
+  <main class="mx-auto w-full max-w-resume px-5 py-10 sm:px-8 sm:py-14 print:max-w-none print:px-0 print:py-0">
+    <div
+      class="rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm shadow-slate-200/60 dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none sm:px-10 sm:py-10 print:rounded-none print:border-0 print:bg-transparent print:p-0 print:shadow-none"
+    >
+      <Header />
+
+      <div class="mt-6 divide-y divide-slate-200 dark:divide-slate-800 print:mt-3 print:divide-neutral-300">
+        <Section id="experience" title="Experience" icon="briefcase">
+          {work.map((job, index) => (
+            <Experience
+              name={job.name}
+              position={job.position}
+              summary={job.summary}
+              highlights={job.highlights}
+              url={job.url}
+              startDate={job.startDate}
+              endDate={job.endDate}
+              last={index === work.length - 1}
+            />
+          ))}
+        </Section>
+
+        <Section id="skills" title="Skills" icon="code">
+          <Skills skills={skills} />
+        </Section>
+
+        <Section id="education" title="Education" icon="academic" keepTogether>
+          <Education education={education} />
+
+          {languages.length > 0 && (
+            <ul class="mt-4 space-y-1 print:mt-2">
+              {languages.map((entry) => (
+                <li class="text-[0.875rem] text-slate-600 dark:text-slate-400 print:text-[9.5pt] print:text-neutral-800">
+                  <span class="font-medium text-slate-900 dark:text-slate-200 print:text-black">
+                    {entry.language}
+                  </span>
+                  <span class="text-slate-400 dark:text-slate-500 print:text-neutral-600"> · </span>
+                  {entry.fluency}
+                </li>
+              ))}
+            </ul>
+          )}
+        </Section>
+
+        {certificates?.length > 0 && (
+          <Section id="certifications" title="Certifications" icon="badge" keepTogether>
+            <Certifications certificates={certificates} />
+          </Section>
+        )}
+
+        {volunteer?.length > 0 && (
+          <Section id="volunteer" title="Volunteer" icon="heart" keepTogether>
+            <Volunteer volunteer={volunteer} />
+          </Section>
+        )}
+      </div>
+
+      <footer
+        class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-[0.75rem] text-slate-400 dark:border-slate-800 dark:text-slate-500 print:mt-3 print:border-neutral-300 print:pt-2 print:text-[8pt] print:text-neutral-600"
+      >
+        <p>
+          {basics.name} · <span class="print:hidden">Last updated </span>{lastUpdated}
+        </p>
+        <p class="print:block">
+          <a href="/resume.json" class="transition hover:text-brand-700 dark:hover:text-brand-300 print:hover:text-neutral-700">
+            resume.json
+          </a>
+          <span class="px-1.5">·</span>
+          <a href={basics.url} class="transition hover:text-brand-700 dark:hover:text-brand-300 print:hover:text-neutral-700">
+            izaac.me
+          </a>
+        </p>
+      </footer>
+    </div>
+  </main>
+</Layout>

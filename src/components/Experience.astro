@@ -1,0 +1,83 @@
+---
+interface Props {
+  name: string;
+  position: string;
+  summary?: string;
+  highlights?: string[];
+  url?: string;
+  startDate?: string;
+  endDate?: string;
+  last?: boolean;
+}
+
+const { name, position, summary, highlights = [], url, startDate, endDate, last = false } = Astro.props;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+const formatDate = (value?: string) => {
+  if (!value) return undefined;
+  const [year, month] = value.split('-');
+  const index = month ? Number(month) - 1 : NaN;
+  return MONTHS[index] ? `${MONTHS[index]} ${year}` : year;
+};
+
+const dateRange = [formatDate(startDate), endDate ? formatDate(endDate) : startDate ? 'Present' : undefined]
+  .filter(Boolean)
+  .join(' – ');
+---
+
+<article
+  class:list={[
+    'relative pl-5 print:break-inside-avoid print:pl-4',
+    !last && 'border-l border-slate-200 pb-1 dark:border-slate-800 print:border-neutral-300',
+  ]}
+>
+  <span
+    class:list={[
+      'absolute -left-[4.5px] top-[0.55rem] h-2 w-2 rounded-full bg-slate-300 ring-4 ring-slate-50 dark:bg-slate-600 dark:ring-slate-950 print:hidden',
+    ]}
+    aria-hidden="true"></span>
+
+  <header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+    <h3 class="text-[0.9375rem] font-semibold text-slate-900 dark:text-white print:text-[10pt]">
+      {position}
+    </h3>
+    {url ? (
+      <a
+        href={url}
+        class="text-[0.8125rem] font-medium text-slate-500 transition hover:text-brand-700 dark:text-slate-400 dark:hover:text-brand-300 print:text-neutral-700"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {name}
+      </a>
+    ) : (
+      <span class="text-[0.8125rem] font-medium text-slate-500 dark:text-slate-400 print:text-neutral-700">
+        {name}
+      </span>
+    )}
+  </header>
+
+  {dateRange && (
+    <p class="mt-0.5 text-[0.75rem] font-medium tabular-nums text-slate-400 dark:text-slate-500 print:text-[9pt] print:text-neutral-600">
+      {dateRange}
+    </p>
+  )}
+
+  {summary && (
+    <p class="mt-1 text-[0.875rem] leading-relaxed text-slate-600 dark:text-slate-400 print:text-[9.5pt] print:text-neutral-800">
+      {summary}
+    </p>
+  )}
+
+  {highlights.length > 0 && (
+    <ul class="mt-2 space-y-1 print:mt-1 print:space-y-0.5">
+      {highlights.map((highlight) => (
+        <li class="flex gap-2 text-[0.875rem] leading-relaxed text-slate-600 dark:text-slate-400 print:text-[9.5pt] print:text-neutral-800">
+          <span class="mt-[0.55em] h-1 w-1 shrink-0 rounded-full bg-brand-500 dark:bg-brand-400 print:bg-neutral-600" aria-hidden="true"></span>
+          <span>{highlight}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</article>

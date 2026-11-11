@@ -1,64 +1,66 @@
-# resume-template
+# izaac.github.io
 
-*A simple Jekyll + GitHub Pages powered resume template.*
+Personal CV site for Izaac Zavaleta (https://www.izaac.me), built with Astro and
+Tailwind CSS. Static output, printable as an ATS-friendly resume.
 
-![img](images/screenshot.png)
+## Stack
 
-## Docs
+- Astro 5 (static output)
+- Tailwind CSS 3.4 via `@astrojs/tailwind`
+- `@tailwindcss/typography`
+- `@astrojs/sitemap`
 
-### Running locally
+## Commands
 
-To test locally, run the following in your terminal:
+```sh
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # static output in dist/
+npm run preview  # serve dist/ locally
+```
 
-1. Clone repo locally
-1. `bundle install`
-2. `bundle exec jekyll serve`
-3. Open your browser to `localhost:4000`
+`npm run dev` and `npm run build` both run `scripts/sync-resume.mjs` first. That
+script copies `src/data/resume.json`, the single source of truth, to
+`public/resume.json` so the same data is available at:
 
-### Customizing
+- rendered page: `https://www.izaac.me/`
+- machine readable: `https://www.izaac.me/resume.json`
 
-First you'll want to fork the repo to your own account. Then clone it locally and customize, or use the GitHub web editor to customize.
+Edit only `src/data/resume.json`. `public/resume.json` is a generated copy and is
+kept in git so branch-based Pages deploys serve it without a build step.
 
-#### Options/configuration
+## Structure
 
-Most of the basic customization will take place in the `/_config.yml` file. Here is a list of customizations available via `/_config.yml`:
+```text
+src/
+  components/    Header, Section, Experience, Skills, Education,
+                 Certifications, Volunteer
+  data/          resume.json (source of truth, JSON Resume schema)
+  layouts/       Layout.astro (meta, OpenGraph, JSON-LD Person, theme, print)
+  pages/         index.astro
+  styles/        global.css (Tailwind layers, components, print rules)
+public/          avatar.svg / avatar.png, favicon.png, CNAME, keybase.txt, robots.txt
+scripts/         sync-resume.mjs
+```
 
-[...write these out...]
+## Editing content
 
-#### Editing content
+All resume content lives in `src/data/resume.json` following the
+[JSON Resume schema](https://jsonresume.org/schema). Components read from it
+directly, so content changes never require markup edits.
 
-Most of the content configuration will take place in the `/_layouts/resume.html` file. Simply edit the markup there accordingly
+## Print / PDF
 
-### Publishing to GitHub Pages for free
+The "Download / Print PDF" button calls `window.print()`. Print styles strip all
+chrome, force black on white, and avoid breaking sections and entries across
+pages. Use the browser's "Save as PDF" destination for the PDF copy.
 
-[GitHub Pages](https://pages.github.com/) will host this for free with your GitHub account. Just make sure you're using a `gh-pages` branch, and the site will automatically be available at `yourusername.github.io/resume-template` (you can rename the repo to resume for your own use if you want it to be available at `yourusername.github.io/resume`). You can also add a CNAME if you want it to be available at a custom domain...
+## Deployment
 
-### Configuring with your own domain name
-
-To setup your GH Pages site with a custom domain, [follow the instructions](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/) on the GitHub Help site for that topic.
-
-### Themes
-
-Right now resume-template only has one theme. More are coming :soon: though. :heart:
-
-## Roadmap
-
-- [ ] Add print button/styles
-- [ ] Add PDF button/functionality
-- [ ] Add more theme styles
-- [ ] Add a "fork me on GitHub" thing
-- [ ] Finish docs
-- [ ] Cleanup CSS
-
-## Contributing
-
-If you spot a bug, or want to improve the code, or even make the dummy content better, you can do the following:
-
-1. [Open an issue](https://github.com/jglovier/resume-template/issues/new) describing the bug or feature idea
-2. Fork the project, make changes, and submit a pull request
+GitHub Pages serves `dist/` on the custom domain from `public/CNAME`. Publish a
+build with your usual Pages workflow (branch or Actions); the domain record and
+`resume.json` endpoint ship with the output.
 
 ## License
 
-The code and styles are licensed under the MIT license. [See project license.](LICENSE) Obviously you should not use the content of this demo repo in your own resume. :wink:
-
-Disclaimer: Use of Homer J. Simpson image and name used under [Fair Use](https://en.wikipedia.org/wiki/Fair_use) for educational purposes. Project license does not apply to use of this material.
+See [LICENSE](LICENSE). The resume content is personal and not for reuse.
